@@ -1,0 +1,22 @@
+<mat-drawer-container class="container">
+  <mat-drawer class="side-panel" mode="side" opened>
+    
+      <input id="search-symbol" placeholder="Enter Symbol" name="search_term" [(ngModel)]="search_term" >
+      <button mat-raised-button color="primary" (click)="getStockList()">Search</button>
+      <mat-divider></mat-divider>
+      
+      <div class="selected-symbol-list">
+        <div *ngFor="let stock of (stockList | async)?.data" (click)="getData(stock.symbol)">
+          <div>{{stock.symbol}}</div>
+          <div style="color:gray">{{stock.name}}</div>
+        </div>
+      </div>
+    
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <div>
+      {{ (selectedStockData | async) | json }}
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
